@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from .models import Receita
 
 def home(request):
-    receitas = Receita.objects.all()
+    receitas = Receita.objects.order_by('-date_receita').filter(publicado=True)
 
     dados = {
         'receitas': receitas
