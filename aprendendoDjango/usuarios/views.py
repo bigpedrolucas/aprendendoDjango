@@ -1,3 +1,4 @@
+from email import message
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import auth, messages
@@ -46,7 +47,12 @@ def login(request):
                 auth.login(request, user)
                 print('Login realizado com sucesso!')
                 return redirect('dashboard')
-
+            else:
+                messages.error(request, 'Email ou senha não conferem. Verifique os campos e tente novamente')
+                return render(request, 'usuarios/login.html')
+        else:
+            messages.error(request, 'Usuário não encontrado')
+            return render(request, 'usuarios/login.html')
     return render(request, 'usuarios/login.html')
 
 def logout(request):
@@ -64,24 +70,6 @@ def dashboard(request):
         return render(request, 'usuarios/dashboard.html', dados)
     else:
         return redirect('home')
-
-def criar_receita(request):
-    if request.method == 'POST':
-        nome_receita = request.POST['nome_receita']
-        ingredientes = request.POST['ingredientes']
-        modo_preparo = request.POST['modo_preparo']
-        tempo_preparo = request.POST['tempo_preparo']
-        rendimento = request.POST['rendimento']
-        categoria = request.POST['categoria']
-        foto_receita = request.FILES['foto_receita']
-        user = get_object_or_404(User, pk=request.user.id)
-        receita = Receita.objects.create(pessoa=user, nome_receita=nome_receita, 
-        ingredientes=ingredientes, modo_preparo=modo_preparo, tempo_preparo=tempo_preparo,
-        rendimento=rendimento, categoria=categoria, foto_receita=foto_receita)
-        receita.save()
-        return redirect('dashboard')
-    else:
-        return render(request, 'usuarios/criar_receita.html')
 
 def campo_vazio(campo):
     return not campo.strip()
