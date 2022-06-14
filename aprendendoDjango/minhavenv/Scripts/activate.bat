@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\pluca\OneDrive\Documents\Lucas\Trabalho\Python\aprendendoDjango\aprendendoDjango-1\aprendendoDjango\minhavenv
+set VIRTUAL_ENV=C:\Users\Engeselt\Desktop\PedroLucas\Python\aprendendoDjango-2\aprendendoDjango\minhavenv
 
 if not defined PROMPT set PROMPT=$P$G
 
@@ -25,6 +25,7 @@ if defined _OLD_VIRTUAL_PATH set PATH=%_OLD_VIRTUAL_PATH%
 if not defined _OLD_VIRTUAL_PATH set _OLD_VIRTUAL_PATH=%PATH%
 
 set PATH=%VIRTUAL_ENV%\Scripts;%PATH%
+set VIRTUAL_ENV_PROMPT=(minhavenv) 
 
 :END
 if defined _OLD_CODEPAGE (
